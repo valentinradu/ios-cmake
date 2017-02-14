@@ -123,8 +123,11 @@ set_target_properties(${APP_NAME} PROPERTIES
 # Build the C++ dynamically linked framework
 add_subdirectory(cppframework)
 
+# Include the framework
+target_include_directories(${APP_NAME} PUBLIC "${PROJECT_BINARY_DIR}/cppframework/$<CONFIG>${CMAKE_XCODE_EFFECTIVE_PLATFORMS}/${FRAMEWORK_NAME}.framework")
+
 # Link the app to it
-target_link_libraries(${APP_NAME} ${FRAMEWORK_NAME})
+target_link_libraries(${APP_NAME} "-framework ${FRAMEWORK_NAME}")
 
 # Set the app's linker search path to the default location on iOS
 set_target_properties(
