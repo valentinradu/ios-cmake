@@ -123,6 +123,9 @@ set_target_properties(${APP_NAME} PROPERTIES
 # Build the C++ dynamically linked framework
 add_subdirectory(cppframework)
 
+# Add the framework as a dependency so it gets built first
+add_dependencies(${APP_NAME} ${FRAMEWORK_NAME})
+
 # Include the framework
 target_include_directories(${APP_NAME} PUBLIC "${PROJECT_BINARY_DIR}/cppframework/$<CONFIG>${CMAKE_XCODE_EFFECTIVE_PLATFORMS}/${FRAMEWORK_NAME}.framework")
 
